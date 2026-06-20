@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Threading;
 using TMPro;
 using UnityEngine;
@@ -15,6 +16,7 @@ public class NumberPad : MonoBehaviour
     private static int _numOfKeyPressed;
     private static string _enteredCode;
     private static bool _isCorrect;
+    private static SleepCoroutine _sleepCoroutine;
 
     void Start()
     {
@@ -23,6 +25,7 @@ public class NumberPad : MonoBehaviour
         keycard.SetActive(false);
         _numOfKeyPressed = 0;
         _enteredCode = "";
+        _sleepCoroutine = gameObject.AddComponent<SleepCoroutine>();
     }
 
     public static void KeyPressed(string code)
@@ -43,9 +46,10 @@ public class NumberPad : MonoBehaviour
         {
             Debug.Log("INCORRECT");
             _codeText.text = "INCORRECT";
+            _sleepCoroutine.SleepAndReset(0.5f, _codeText);
+            
             _enteredCode = "";
             _numOfKeyPressed = 0;
-            _codeText.text = "";
         }
         else
         {
@@ -54,5 +58,10 @@ public class NumberPad : MonoBehaviour
             _codeText.text = "CORRECT";
             _keycard.SetActive(true);
         }
-    } 
+    }
+
+    private static IEnumerator Sleep()
+    {
+        yield return new WaitForSeconds(0.5f);
+    }
 }
