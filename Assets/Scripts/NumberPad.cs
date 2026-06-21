@@ -58,9 +58,4 @@ public class NumberPad : MonoBehaviour
             _keycard.SetActive(true);
         }
     }
-
-    private static IEnumerator Sleep()
-    {
-        yield return new WaitForSeconds(0.5f);
-    }
 }
