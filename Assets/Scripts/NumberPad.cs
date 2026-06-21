@@ -46,8 +46,7 @@ public class NumberPad : MonoBehaviour
         {
             Debug.Log("INCORRECT");
             _codeText.text = "INCORRECT";
-            _sleepCoroutine.SleepAndReset(0.5f, _codeText);
-            
+            _sleepCoroutine.SleepAndReset(1f, _codeText);
             _enteredCode = "";
             _numOfKeyPressed = 0;
         }
